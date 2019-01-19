@@ -4,25 +4,25 @@
     <item
         android:id="@+id/action_categories"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_categories_icon"
         android:title="@string/text_categories"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_chart"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_chart_icon"
         android:title="@string/text_chart"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_settings_icon"
         android:title="@string/text_settings"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_transactions"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/text_transaction"
+        android:icon="@drawable/ic_transactions_icon"
+        android:title="@string/text_transactions"
         app:showAsAction="ifRoom" />
 </menu>
