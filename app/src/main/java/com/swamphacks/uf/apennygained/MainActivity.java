@@ -1,12 +1,10 @@
 package com.swamphacks.uf.apennygained;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,11 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        final Categories fCategories = new Categories();
-        final Settings fSettings = new Settings();
-        final Transactions fTransactions = new Transactions();
-        final Fragment fChart = new Fragment();
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
@@ -38,28 +31,30 @@ public class MainActivity extends AppCompatActivity {
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment tempFrag = new Fragment();
+
                         switch(item.getItemId())
                         {
                             case R.id.action_chart:
-                                tempFrag = fChart;
                                 break;
                             case R.id.action_categories:
-                                tempFrag = fCategories;
+                                startActivity(new Intent(MainActivity.this, Categories.class));
                                 break;
                             case R.id.action_settings:
-                                tempFrag = fSettings;
+                                startActivity(new Intent(MainActivity.this, Settings.class));
                                 break;
                             case R.id.action_transactions:
-                                tempFrag = fTransactions;
+                                startActivity(new Intent(MainActivity.this, Transactions.class));
                                 break;
                         }
-                        fragmentManager.beginTransaction().replace(R.id.flContainer, tempFrag).commit();
                         return true;
                     }
                 });
         // Set default selection
         bottomNavigationView.setSelectedItemId(R.id.action_chart);
-
+        PieChartView pieChartView = findViewById(R.id.chart);
+        List<SliceValue> pieData = new ArrayList<>();
+        PieChartData pieChartData = new PieChartData(pieData);
+        pieChartData.setHasLabels(true);
+        pieChartView.setPieChartData(pieChartData);
     }
 }
