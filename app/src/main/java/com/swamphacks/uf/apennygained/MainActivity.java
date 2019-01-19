@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                        switch(item.getItemId())
+                        switch(item.getItemId())//Switch based off of which Icon is selected on the Navigation menu
                         {
                             case R.id.action_chart:
                                 break;
