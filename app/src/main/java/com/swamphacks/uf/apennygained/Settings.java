@@ -1,5 +1,7 @@
 package com.swamphacks.uf.apennygained;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.Preference;
@@ -7,7 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -21,14 +25,59 @@ public class Settings extends AppCompatActivity {
     SwitchCompat switch_1;
     boolean switchState1;
     SharedPreferences preferences;
+    String usr = "", pass = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        //change username
         TextView username = findViewById(R.id.username);
+        TextView usrname = findViewById(R.id.usrname);
+        username.setOnClickListener(new TextView.OnClickListener(){
+            public void onClick(View v) {
+                LayoutInflater inflater = LayoutInflater.from(Settings.this);
+                final View yourCustomView = inflater.inflate(R.layout.username_dialog, null);
+                final TextView etName = (EditText) yourCustomView.findViewById(R.id.username);
+                AlertDialog dialog = new AlertDialog.Builder(Settings.this)
+                        .setTitle("Change Username")
+                        .setView(yourCustomView)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                usr = etName.getText().toString();
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", null).create();
+                dialog.show();
+            }
+        });
+
+        //change password
         TextView changePassword = findViewById(R.id.changePassword);
+        TextView passwd = findViewById(R.id.passwd);
+        changePassword.setOnClickListener(new TextView.OnClickListener(){
+            public void onClick(View v) {
+                LayoutInflater inflater = LayoutInflater.from(Settings.this);
+                final View yourCustomView = inflater.inflate(R.layout.password_dialog, null);
+                final TextView etName = (EditText) yourCustomView.findViewById(R.id.password);
+                AlertDialog dialog = new AlertDialog.Builder(Settings.this)
+                        .setTitle("Change Password")
+                        .setView(yourCustomView)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                pass = etName.getText().toString();;
+                            }
+                        })
+                        .setNegativeButton("Cancel", null).create();
+
+                dialog.show();
+            }
+        });
+
+        usrname.setText(usr + "");
+        passwd.setText(pass + "");
         TextView changeDate = findViewById(R.id.changeDate);
 
 
